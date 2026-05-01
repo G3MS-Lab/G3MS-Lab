@@ -96,7 +96,7 @@ export default function PointCloudBackground() {
 			const opacityFactor = heroH > 0
 				? Math.min(1, Math.max(0, (sy - heroH * 0.4) / (heroH * 0.4)))
 				: 1;
-			mount.style.opacity = String(0.5 * opacityFactor);
+			mount.style.opacity = String(0.3 * opacityFactor);
 
 			if (pointsMesh) {
 				// Scroll-driven rotation
@@ -156,13 +156,13 @@ export default function PointCloudBackground() {
 
 				for (let i = 0; i < n; i++) {
 					const [x, y, z, normalC] = raw[i];
-					positions[i * 3]     = (x - cx) * scale;
+					positions[i * 3] = (x - cx) * scale;
 					positions[i * 3 + 1] = (z - zMin) * zScale - WORLD * 0.15;
 					positions[i * 3 + 2] = (y - cy) * scale;
 					const t = (z - zMin) / zRange;
 					const brightness = 0.72 + Math.abs(normalC) * 0.28;
 					const [r, g, b] = heightColor(t);
-					aColors[i * 3]     = r * brightness;
+					aColors[i * 3] = r * brightness;
 					aColors[i * 3 + 1] = g * brightness;
 					aColors[i * 3 + 2] = b * brightness;
 					sizes[i] = 0.8 + Math.random() * Math.random() * 2.2;
@@ -170,8 +170,8 @@ export default function PointCloudBackground() {
 
 				const geo = new THREE.BufferGeometry();
 				geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-				geo.setAttribute('aColor',   new THREE.BufferAttribute(aColors, 3));
-				geo.setAttribute('size',     new THREE.BufferAttribute(sizes, 1));
+				geo.setAttribute('aColor', new THREE.BufferAttribute(aColors, 3));
+				geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
 				const mat = new THREE.ShaderMaterial({
 					vertexShader,
