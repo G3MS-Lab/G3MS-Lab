@@ -97,7 +97,7 @@ export default function PointCloudBackground() {
 			const opacityFactor = heroH > 0
 				? Math.min(1, Math.max(0, (sy - heroH * 0.4) / (heroH * 0.4)))
 				: 1;
-			mount.style.opacity = String(0.75 * opacityFactor);
+			mount.style.opacity = String(0.5 * opacityFactor);
 
 			// Rotate around Y axis driven by scroll progress (one full rotation across the page)
 			if (pointsMesh) {
