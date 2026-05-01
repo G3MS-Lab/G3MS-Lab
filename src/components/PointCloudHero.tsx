@@ -107,7 +107,7 @@ export default function PointCloudHero() {
 		window.addEventListener('resize', onResize);
 
 		// ── Load & parse CSV ────────────────────────────────────────────────────
-		fetch('/pointcloud.csv')
+		fetch(import.meta.env.BASE_URL + 'pointcloud.csv')
 			.then(r => r.text())
 			.then(text => {
 				const lines = text.split('\n');

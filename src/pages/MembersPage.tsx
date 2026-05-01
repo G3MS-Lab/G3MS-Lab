@@ -28,7 +28,7 @@ export default function MembersPage() {
                   <li key={member.slug} className="member-card">
                     <div className="member-avatar" aria-hidden="true">
                       {member.photo ? (
-                        <img src={member.photo} alt={member.name} />
+                        <img src={import.meta.env.BASE_URL.replace(/\/$/, '') + member.photo} alt={member.name} />
                       ) : (
                         <span className="member-initials">
                           {member.name.split(' ').map((n) => n[0]).join('').slice(0, 2)}
