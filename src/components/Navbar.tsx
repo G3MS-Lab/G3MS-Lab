@@ -46,7 +46,7 @@ export default function Navbar() {
     <header className="navbar">
       <nav className="navbar-inner" aria-label="Main navigation">
         <NavLink to="/" className="navbar-brand">
-          <img src="/G3MS.svg" alt="G3MS Lab" className="navbar-logo" />
+          <img src={import.meta.env.BASE_URL + 'G3MS.svg'} alt="G3MS Lab" className="navbar-logo" />
         </NavLink>
         <div className="navbar-right">
           <ul className="navbar-links">

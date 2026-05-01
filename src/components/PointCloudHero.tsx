@@ -196,7 +196,7 @@ export default function PointCloudHero() {
 			<div ref={mountRef} className="hero-canvas" aria-hidden="true" />
 			{loading && <div className="hero-loading" aria-hidden="true" />}
 			<div className="hero-top">
-				<img src="/G3MS.svg" alt="G3MS Lab" className="hero-logo" />
+				<img src={import.meta.env.BASE_URL + 'G3MS.svg'} alt="G3MS Lab" className="hero-logo" />
 				<div className="hero-title-group">
 					<h1 className="hero-title">G3MS Lab</h1>
 					<p className="hero-sub">Geometric, Game and Graphics Modeling and Simulation Laboratory</p>
