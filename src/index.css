@@ -45,8 +45,8 @@ body::after {
   position: fixed;
   bottom: -40px;
   right: -40px;
-  width: 340px;
-  height: 340px;
+  width: 50vw;
+  height: 50vw;
   background: url('/G3MS-Lab/G3MS.svg') center / contain no-repeat;
   opacity: 0.05;
   pointer-events: none;
