@@ -56,20 +56,20 @@ export default function PointCloudBackground() {
 		const mount = mountRef.current;
 		if (!mount || !window.WebGLRenderingContext) return;
 
-		const initW = Math.round(0.5 * window.innerWidth);
-		const initH = window.innerHeight;
+		const W = window.innerWidth;
+		const H = window.innerHeight;
 
+		// Canvas always covers the full viewport — no clipping at box edges
 		const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
 		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-		renderer.setSize(initW, initH);
+		renderer.setSize(W, H);
 		renderer.setClearColor(0x000000, 0);
 		mount.appendChild(renderer.domElement);
-		// Stretch canvas to always fill the container div regardless of render resolution
 		renderer.domElement.style.width = '100%';
 		renderer.domElement.style.height = '100%';
 
 		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera(50, initW / initH, 0.1, 1000);
+		const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 1000);
 		camera.position.set(0, 0, 8);
 		camera.lookAt(0, 0, 0);
 
@@ -77,7 +77,6 @@ export default function PointCloudBackground() {
 		let paused = false;
 		let pointsMesh: THREE.Points | null = null;
 		let tick = 0;
-		let lastWidthPct = 50;
 
 		const onVisibility = () => { paused = document.hidden; };
 		document.addEventListener('visibilitychange', onVisibility);
@@ -91,7 +90,7 @@ export default function PointCloudBackground() {
 			const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
 			const progress = Math.min(sy / maxScroll, 1);
 
-			// Fade in only after scrolling past the hero section to avoid visual conflict
+			// Fade in past hero
 			const hero = document.querySelector('.hero') as HTMLElement | null;
 			const heroH = hero ? hero.offsetHeight : 0;
 			const opacityFactor = heroH > 0
@@ -99,26 +98,13 @@ export default function PointCloudBackground() {
 				: 1;
 			mount.style.opacity = String(0.5 * opacityFactor);
 
-			// Rotate around Y axis driven by scroll progress (one full rotation across the page)
 			if (pointsMesh) {
+				// Scroll-driven rotation
 				pointsMesh.rotation.y = progress * Math.PI * 2;
+				// Gentle vertical bob
 				pointsMesh.position.y = -1.5 + Math.sin(tick * 0.006) * 0.15;
-			}
-
-			// Expand from 50 vw (right side) → 100 vw (full width) as page is scrolled to bottom
-			const widthPct = 50 + progress * 50;
-			mount.style.width = `${widthPct}vw`;
-			mount.style.left = `${100 - widthPct}vw`;
-
-			// Update render resolution when width shifts by 2%+ to avoid per-frame resizes
-			if (Math.abs(widthPct - lastWidthPct) > 2) {
-				lastWidthPct = widthPct;
-				const newW = Math.max(1, Math.round(widthPct * window.innerWidth / 100));
-				camera.aspect = newW / window.innerHeight;
-				camera.updateProjectionMatrix();
-				renderer.setSize(newW, window.innerHeight);
-				renderer.domElement.style.width = '100%';
-				renderer.domElement.style.height = '100%';
+				// Start offset to the right, drift to centre as page is scrolled to bottom
+				pointsMesh.position.x = (1 - progress) * 3.5;
 			}
 
 			renderer.render(scene, camera);
@@ -126,10 +112,9 @@ export default function PointCloudBackground() {
 		animate();
 
 		const onResize = () => {
-			const newW = Math.max(1, Math.round(lastWidthPct * window.innerWidth / 100));
-			camera.aspect = newW / window.innerHeight;
+			camera.aspect = window.innerWidth / window.innerHeight;
 			camera.updateProjectionMatrix();
-			renderer.setSize(newW, window.innerHeight);
+			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.domElement.style.width = '100%';
 			renderer.domElement.style.height = '100%';
 		};
@@ -171,13 +156,13 @@ export default function PointCloudBackground() {
 
 				for (let i = 0; i < n; i++) {
 					const [x, y, z, normalC] = raw[i];
-					positions[i * 3] = (x - cx) * scale;
+					positions[i * 3]     = (x - cx) * scale;
 					positions[i * 3 + 1] = (z - zMin) * zScale - WORLD * 0.15;
 					positions[i * 3 + 2] = (y - cy) * scale;
 					const t = (z - zMin) / zRange;
 					const brightness = 0.72 + Math.abs(normalC) * 0.28;
 					const [r, g, b] = heightColor(t);
-					aColors[i * 3] = r * brightness;
+					aColors[i * 3]     = r * brightness;
 					aColors[i * 3 + 1] = g * brightness;
 					aColors[i * 3 + 2] = b * brightness;
 					sizes[i] = 0.8 + Math.random() * Math.random() * 2.2;
@@ -185,8 +170,8 @@ export default function PointCloudBackground() {
 
 				const geo = new THREE.BufferGeometry();
 				geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-				geo.setAttribute('aColor', new THREE.BufferAttribute(aColors, 3));
-				geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+				geo.setAttribute('aColor',   new THREE.BufferAttribute(aColors, 3));
+				geo.setAttribute('size',     new THREE.BufferAttribute(sizes, 1));
 
 				const mat = new THREE.ShaderMaterial({
 					vertexShader,
@@ -215,8 +200,8 @@ export default function PointCloudBackground() {
 			style={{
 				position: 'fixed',
 				top: 0,
-				left: '50vw',
-				width: '50vw',
+				left: 0,
+				width: '100vw',
 				height: '100vh',
 				opacity: 0,
 				pointerEvents: 'none',
