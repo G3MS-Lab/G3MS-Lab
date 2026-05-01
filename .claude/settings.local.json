@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl -s http://localhost:5173/src/main.tsx)",
+      "Bash(pkill -f \"vite --port 5173\")",
+      "Bash(npm uninstall *)",
+      "Bash(awk 'NR==1 || NR%5==0' /Users/inteoty/Documents/G3MS_Lab/G3MS-Lab/image/pointcloud.csv)",
+      "Bash(awk -F',' 'NR>1{if\\(z==\"\"\\){z=$3;maxz=$3} if\\($3<z\\)z=$3; if\\($3>maxz\\)maxz=$3} END{print \"z min=\"z\" max=\"maxz}' /Users/inteoty/Documents/G3MS_Lab/G3MS-Lab/image/pointcloud.csv)",
+      "WebSearch",
+      "WebFetch(domain:dblp.org)",
+      "WebFetch(domain:scholar.google.com)",
+      "WebFetch(domain:www.researchgate.net)",
+      "WebFetch(domain:ieeexplore.ieee.org)",
+      "WebFetch(domain:kmutt.academia.edu)",
+      "WebFetch(domain:kirim.kmutt.ac.th)",
+      "WebFetch(domain:zenodo.org)",
+      "WebFetch(domain:www.cpe.kmutt.ac.th)",
+      "WebFetch(domain:www.semanticscholar.org)",
+      "WebFetch(domain:www.scientific.net)",
+      "WebFetch(domain:publications.waset.org)",
+      "WebFetch(domain:www.taylorfrancis.com)",
+      "WebFetch(domain:www.sciencedirect.com)",
+      "Bash(curl -s \"https://www.cpe.kmutt.ac.th/media/cache/e2/06/e20626bb2632c84fd35cf6dc53fdc801.jpg\" -o /Users/inteoty/Documents/G3MS_Lab/G3MS-Lab/public/members/natasha.jpg)",
+      "Bash(curl -s \"https://www.cpe.kmutt.ac.th/media/cache/0a/86/0a8639de528a453f2335cbc8eeeb4070.jpg\" -o /Users/inteoty/Documents/G3MS_Lab/G3MS-Lab/public/members/taweechai.jpg)",
+      "Bash(gh auth *)"
+    ]
+  }
+}
