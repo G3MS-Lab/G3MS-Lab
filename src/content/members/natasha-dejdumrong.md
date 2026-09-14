@@ -6,7 +6,8 @@ researchInterests:
   - Bézier and Spline Curves
   - 3D Point Cloud Processing
   - Handwriting Recognition
-  - Educational Game Design
+  - Digital Educational Games (DEGs)
+  - LADDER framework
 email: natasha.d@cpe.kmutt.ac.th
 photo: /members/natasha.jpg
 personalUrl: "https://kirim.kmutt.ac.th/converis/portal/detail/Person/54166858"

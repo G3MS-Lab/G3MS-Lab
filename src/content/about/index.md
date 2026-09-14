@@ -4,6 +4,8 @@ researchAreas:
   - Bézier Curves and Surface Modeling
   - 3D Point Cloud Processing
   - Digital Educational Game Design
+  - Spatial Interpolation
+  - Rainfall Estimation
   - Handwriting Recognition
   - Information Security
 contactEmail: g3ms@cpe.kmutt.ac.th

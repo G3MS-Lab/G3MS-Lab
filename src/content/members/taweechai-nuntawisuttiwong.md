@@ -4,8 +4,11 @@ role: Faculty
 researchInterests:
   - Curve Approximation
   - 3D Point Cloud Processing
-  - Educational Game Design
+  - Digital Educational Games (DEGs)
+  - Spatial Interpolation
+  - Rainfall Estimation
   - Information Security
+  
 email: taweechai.n@cpe.kmutt.ac.th
 photo: /members/taweechai.jpg
 ---
