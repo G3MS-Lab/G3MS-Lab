@@ -1,5 +1,5 @@
 ---
-title: "LockInMamba: Spatio-Temporal Architecture for Caregiver Localization Using BLE Beacons"
+title: "Modeling Student Mastery in Calculus Using Knowledge Tracing Techniques"
 authors:
   - Pitchayuth Panich
   - Puntharee Roongprasert

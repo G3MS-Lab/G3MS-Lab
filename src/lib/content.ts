@@ -45,8 +45,8 @@ function parseFrontmatter(raw: string): { data: Record<string, unknown>; body: s
 
     while (i < lines.length && lines[i].startsWith('  ')) {
       const child = lines[i];
-      const listMatch = child.match(/^  - (.*)$/);
-      const kvMatch = child.match(/^  ([a-zA-Z][a-zA-Z0-9_]*): ?(.*)$/);
+      const listMatch = child.match(/^ {2}- (.*)$/);
+      const kvMatch = child.match(/^ {2}([a-zA-Z][a-zA-Z0-9_]*): ?(.*)$/);
       if (listMatch) listItems.push(stripQuotes(listMatch[1]));
       else if (kvMatch) objEntries[kvMatch[1]] = stripQuotes(kvMatch[2]);
       i++;

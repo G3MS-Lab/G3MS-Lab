@@ -25,7 +25,10 @@ export default function MembersPage() {
               <h2 className="member-role-header">{role}</h2>
               <ul className="member-grid">
                 {group.map((member) => (
-                  <li key={member.slug} className="member-card">
+                  <li
+                    key={member.slug}
+                    className={`member-card ${member.role === 'Faculty' ? 'member-card-faculty' : ''}`}
+                  >
                     <div className="member-avatar" aria-hidden="true">
                       {member.photo ? (
                         <img src={import.meta.env.BASE_URL.replace(/\/$/, '') + member.photo} alt={member.name} />
